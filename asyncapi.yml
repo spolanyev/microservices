@@ -1,0 +1,88 @@
+asyncapi: 2.5.0
+info:
+  title: Weather Forecast Microservices
+  version: 0.0.1
+servers:
+  amqp:
+    url: 'amqp://message-broker:5672'
+    protocol: amqp
+channels:
+  MicroserviceA-to-MicroserviceB:
+    publish:
+      summary: Send a user identifier.
+      operationId: SendUserIdentifier
+      message:
+        summary: Website sends a user identifier.
+        payload:
+          type: object
+          properties:
+            user_identifier:
+              type: string
+    subscribe:
+      summary: Wait for a user identifier.
+      operationId: WaitUserIdentifier
+      message:
+        summary: CityProvider waits for a user identifier.
+        payload:
+          type: object
+          properties:
+            user_identifier:
+              type: string
+  MicroserviceB-to-MicroserviceC:
+    publish:
+      summary: Send a list of cities.
+      operationId: sendCities
+      message:
+        summary: CityProvider sends a list of cities.
+        payload:
+          type: object
+          properties:
+            user_identifier:
+              type: string
+            cities:
+              type: array
+              items:
+                type: string
+    subscribe:
+      summary: Wait for a list of cities.
+      operationId: WaitCities
+      message:
+        summary: WeatherProvider waits for a list of cities.
+        payload:
+          type: object
+          properties:
+            user_identifier:
+              type: string
+            cities:
+              type: array
+              items:
+                type: string
+  User-unique-id-here:
+    publish:
+      summary: Send a user identifier, a city, and a forecast.
+      operationId: sendForecast
+      message:
+        summary: WeatherProvider sends a user identifier, a city, and a forecast.
+        payload:
+          type: object
+          properties:
+            user_identifier:
+              type: string
+            city:
+              type: string
+            forecast:
+              type: string
+    subscribe:
+      summary: Wait for a user identifier, a city, and a forecast.
+      operationId: waitForecast
+      message:
+        summary: Website waits for a user identifier, a city, and a forecast.
+        payload:
+          type: object
+          properties:
+            user_identifier:
+              type: string
+            city:
+              type: string
+            forecast:
+              type: string
