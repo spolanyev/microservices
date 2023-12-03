@@ -1,9 +1,9 @@
 # About
 
 
-The idea came to me when I received a [test task](https://github.com/spolanyev/testJagaad) in PHP to implement an application that retrieves a list of cities from one API and then obtains weather forecasts for those cities from another API. At the time, I had already implemented a command-line program in Rust (it was another [test task](https://github.com/spolanyev/testElastio)), which obtains weather forecasts for a city. I thought that it may be used as a microservice in a new application.
+The idea came to me when I was given a [test assignment](https://github.com/spolanyev/testJagaad) in PHP to implement an application that retrieves a list of cities from one API and then retrieves weather forecasts for those cities from another API. At the time, I had already implemented a console application in Rust (another [test assignment](https://github.com/spolanyev/testElastio)) that retrieved weather forecasts for a city. I thought it could be used as a microservice in a new application.
 
-I added typical microservice infrastructure, such as RabbitMQ for communication between microservices and ELK for log analyzing and visualizing. I then packaged it all in Docker containers.
+I added typical microservice infrastructure such as RabbitMQ for inter-microservice communication and ELK for log analysis and visualization. I then packaged it all in Docker containers.
 
 | Microservice                        | Engine        | Codename      |
 |-------------------------------------|---------------|---------------|
@@ -18,7 +18,7 @@ I added typical microservice infrastructure, such as RabbitMQ for communication 
 | website                             | PHP           | MicroserviceA |
 
 
-A user visits the Website. The Website sends a command to the City Provider. The City Provider obtains a list of cities and sends it to the Weather Provider. The Weather Provider checking fresh results in the Weather Cache sends weather forecasts to the Website. The Website stores the data in the Archive Record and displays it to the user.<br> 
+A user visits `website`. `website` sends a command to `city-provider`. `city-provider` gets a list of cities and sends it to `weather-provider`. `weather-provider` checks `weather-cache` for fresh results and sends weather forecasts to `website`. `website` stores the data in `archive-record` and displays it to the user.<br> 
 
 
 The AsyncApi file is [here](asyncapi.yml).
@@ -32,4 +32,4 @@ The AsyncApi file is [here](asyncapi.yml).
 
 # Contacts
 
-If you are hiring, contact me at [spolanyev@gmail.com](mailto:spolanyev@gmail.com?subject=Vacancy)
+If you are hiring, feel free to contact me at [spolanyev@gmail.com](mailto:spolanyev@gmail.com?subject=Microservices)
